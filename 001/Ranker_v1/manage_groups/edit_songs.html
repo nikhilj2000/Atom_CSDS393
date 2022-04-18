@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		  <meta charset="UTF-8" />
+		  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="/Users/nikhil-james/Documents/Atom_CSDS393/001/Ranker_v1/manage_groups/manage_groups_css/edit_songs.css">
+		  <title>
+        Edit {{name}}
+      </title>
+    </head>
+	<body>
+		<h1>
+      Edit {{name}}
+    </h1>
+		<form id='searchForm' actions='/group/edit-songs/{{gid}}' method='get'>
+      {% csrf_token %}
+		</form>
+		<form actions='/groups/edit-songs/{{gid}}' method='get'>{% csrf_token %}
+      <div id="grid">
+        <div>
+          <h2>
+            Select From Your Songs
+          </h2>
+          <h3>
+            Remove Songs:
+          </h3>
+          {% for id, name in mySongs.items %}
+            <input type='checkbox' id='{{id}}_my' name='rmSongs[]' value='{{id}}'>
+            <label for='{{id}}_my'> {{name}}</label>
+            <br>
+          {% endfor %}
+          <h3>
+            Add Songs:
+          </h3>
+          {% for id, name in otherSongs.items %}
+            <input type='checkbox' id='{{id}}_my' name='addSongs[]' value='{{id}}'>
+            <label for='{{id}}_my'> {{name}}</label>
+            <br>
+          {% endfor %}
+        </div>
+        <div>
+          <h2>
+            Search For Songs
+          </h2>
+          <input type='text' form='searchForm' id='searchArtist' name='searchArtist' placeholder='Search Song Artist'>
+          <input type='text' form='searchForm' id='searchName' name='searchName' placeholder='Search Song Name'>
+          <input type='text' form='searchForm' id='searhAlbum' name='searchAlbum' placeholder='Search Song Album'>
+          <input type='submit' form='searchForm' value='Search'>
+          <h3>
+            Remove Songs:
+          </h3>
+          {% for id, name in mySearch.items %}
+            <input type='checkbox' id='{{id}}_search' name='rmSongs[]' value='{{id}}'>
+            <label for='{{id}}_search'> {{name}}</label>
+            <br>
+          {% endfor %}
+          <h3>
+            Add Songs:
+          </h3>
+          {% for id, name in otherSearch.items %}
+            <input type='checkbox' id='{{id}}_search' name='addSongs[]' value='{{id}}'>
+            <label for='{{id}}_search'> {{name}}</label>
+            <br>
+          {% endfor %}
+          <br>
+          <input type='submit' value='Update'>
+        </div>
+      </div>
+		</form>
+		<br>
+    <br><br><br><br><br><br><br><br><br>
+		<a href='/groups/view-group/{{gid}}'>
+      <input type="submit" value="Go Back">
+    </a>
+	</body>
+</html>
